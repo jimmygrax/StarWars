@@ -2,7 +2,7 @@ package com.example.demo;
 
 import java.util.List;
 
-public class Naves {
+public class Starship {
      private String name;
     private String model;
     private String costInCredits;
@@ -14,10 +14,10 @@ public class Naves {
     private List<String> pilots;
     private List<String> films;
 
-    public Naves() {
+    public Starship() {
     }
 
-    public Naves(String name, String model, String costInCredits, String crew, String cargoCapacity, String consumables, String hyperdriveRating, String starshipClass, List<String> pilots, List<String> films) {
+    public Starship(String name, String model, String costInCredits, String crew, String cargoCapacity, String consumables, String hyperdriveRating, String starshipClass, List<String> pilots, List<String> films) {
         this.name = name;
         this.model = model;
         this.costInCredits = costInCredits;

@@ -17,16 +17,16 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 @Service
-public class NavesService {
+public class StarshipService {
 
     private static final String FILE_PATH = "demo\\src\\main\\resources\\naves.json";
     private static final String REQUESTS_FILE = "demo\\src\\main\\resources\\peticiones.json";
     private static final Gson gson = new Gson();
 
     // Obtener todos los vehículos desde el JSON
-    public List<Naves> getAllNaves() {
+    public List<Starship> getAllStarships() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
-            Type listType = new TypeToken<ArrayList<Naves>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<Starship>>() {}.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
             return new ArrayList<>();
@@ -34,15 +34,15 @@ public class NavesService {
     }
 
     public boolean generatePDFAndLogRequest(String shipName) {
-        List<Naves> starships = getAllNaves();
+        List<Starship> starships = getAllStarships();
 
         // Buscar la nave por nombre
-        Optional<Naves> optionalStarship = starships.stream()
+        Optional<Starship> optionalStarship = starships.stream()
                 .filter(s -> s.getName().equalsIgnoreCase(shipName))
                 .findFirst();
 
         if (optionalStarship.isPresent()) {
-            Naves starship = optionalStarship.get();
+            Starship starship = optionalStarship.get();
 
             // Generar el PDF
             try {

@@ -9,25 +9,24 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-public class NavesController {
+public class StarshipController {
 
     @Autowired
-    private final NavesService navesService;
+    private final StarshipService navesService;
 
-    public NavesController(NavesService navesService) {
+    public StarshipController(StarshipService navesService) {
         this.navesService = navesService;
     }
 
-    @GetMapping("/naves")
-    public List<Naves> getAllNaves() {
-        return navesService.getAllNaves();
+    @GetMapping("/starship")
+    public List<Starship> getAllStarships() {
+        return navesService.getAllStarships();
     }
 
-    @PostMapping("/naves/pdf")
+    @PostMapping("/starship/pdf")
     public ResponseEntity<String> generateStarshipPDF(@RequestBody Map<String, String> request) {
         String shipName = request.get("ship");
         if (shipName == null || shipName.isEmpty()) {

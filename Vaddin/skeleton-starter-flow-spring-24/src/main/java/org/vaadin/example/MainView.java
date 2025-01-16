@@ -1,60 +1,44 @@
 package org.vaadin.example;
 
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * A sample Vaadin view class.
- * <p>
- * To implement a Vaadin view just extend any Vaadin component and use @Route
- * annotation to announce it in a URL as a Spring managed bean.
- * <p>
- * A new instance of this class is created for every new user and every browser
- * tab/window.
- * <p>
- * The main view contains a text field for getting the user name and a button
- * that shows a greeting message in a notification.
- */
-@Route
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
+
+@Route("")
 public class MainView extends VerticalLayout {
 
-    /**
-     * Construct a new Vaadin view.
-     * <p>
-     * Build the initial UI state for the user accessing the application.
-     *
-     * @param service
-     *            The message service. Automatically injected Spring managed bean.
-     */
-    public MainView(@Autowired GreetService service) {
+    private final StarshipService starshipService;
+    private final Grid<Starship> grid;
 
-        // Use TextField for standard text input
-        TextField textField = new TextField("Your name");
-        textField.addClassName("bordered");
+    public MainView(StarshipService starshipService) {
+        this.starshipService = starshipService;
+        this.grid = new Grid<>(Starship.class, false);
 
-        // Button click listeners can be defined as lambda expressions
-        Button button = new Button("Say hello", e -> {
-            add(new Paragraph(service.greet(textField.getValue())));
-        });
+        configureGrid();
+        add(grid);
+        loadData();
+    }
 
-        // Theme variants give you predefined extra styles for components.
-        // Example: Primary button has a more prominent look.
-        button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+    private void configureGrid() {
+        grid.addColumn(Starship::getName).setHeader("Nombre");
+        grid.addColumn(Starship::getModel).setHeader("Modelo");
+        grid.addColumn(Starship::getStarshipClass).setHeader("Clase");
+        grid.addColumn(Starship::getCrew).setHeader("Tripulación");
 
-        // You can specify keyboard shortcuts for buttons.
-        // Example: Pressing enter in this view clicks the Button.
-        button.addClickShortcut(Key.ENTER);
+        grid.addComponentColumn(starship -> {
+            Button generateButton = new Button("Generar PDF");
+            generateButton.addClickListener(e -> {
+                starshipService.generatePDF(starship.getName());
+                generateButton.setText("Generado");
+                generateButton.setEnabled(false);
+            });
+            return generateButton;
+        }).setHeader("Acciones");
+    }
 
-        // Use custom CSS classes to apply styling. This is defined in
-        // styles.css.
-        addClassName("centered-content");
-
-        add(textField, button);
+    private void loadData() {
+        grid.setItems(starshipService.getAllStarships());
     }
 }

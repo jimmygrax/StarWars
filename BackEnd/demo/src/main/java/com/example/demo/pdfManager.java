@@ -22,7 +22,7 @@ public class pdfManager {
      * @throws IOException
      * @throws DocumentException
      */
-    public void generateStarshipPDF(Naves starship) throws IOException, DocumentException {
+    public void generateStarshipPDF(Starship starship) throws IOException, DocumentException {
         // Crear la carpeta /naves si no existe
         File directory = new File(PDF_DIRECTORY);
         if (!directory.exists()) {
