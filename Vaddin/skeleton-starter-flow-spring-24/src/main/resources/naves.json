@@ -1,0 +1,61 @@
+[
+    {
+      "name": "Millennium Falcon",
+      "model": "YT-1300 light freighter",
+      "costInCredits": "100000",
+      "crew": "4",
+      "cargoCapacity": "100000",
+      "consumables": "2 months",
+      "hyperdriveRating": "0.5",
+      "starshipClass": "Light freighter",
+      "pilots": [
+        "Han Solo",
+        "Chewbacca",
+        "Lando Calrissian",
+        "Nien Nunb"
+      ],
+      "films": [
+        "A New Hope",
+        "The Empire Strikes Back",
+        "Return of the Jedi",
+        "The Force Awakens"
+      ]
+    },
+    {
+      "name": "X-wing",
+      "model": "T-65 X-wing",
+      "costInCredits": "149999",
+      "crew": "1",
+      "cargoCapacity": "110",
+      "consumables": "1 week",
+      "hyperdriveRating": "1.0",
+      "starshipClass": "Starfighter",
+      "pilots": [
+        "Luke Skywalker",
+        "Biggs Darklighter",
+        "Wedge Antilles"
+      ],
+      "films": [
+        "A New Hope",
+        "The Empire Strikes Back",
+        "Return of the Jedi"
+      ]
+    },
+    {
+      "name": "Star Destroyer",
+      "model": "Imperial I-class Star Destroyer",
+      "costInCredits": "150000000",
+      "crew": "47060",
+      "cargoCapacity": "36000000",
+      "consumables": "2 years",
+      "hyperdriveRating": "2.0",
+      "starshipClass": "Star Destroyer",
+      "pilots": [],
+      "films": [
+        "A New Hope",
+        "The Empire Strikes Back",
+        "Return of the Jedi"
+      ]
+    }
+  ]
+  
